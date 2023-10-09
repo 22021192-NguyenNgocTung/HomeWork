@@ -1,0 +1,9 @@
+Insertion sort
+1Kints: 5
+2Kints: 7
+4Kints: 9
+
+Selection sort
+1Kints: 3
+2Kints: 4
+4Kints: 13
