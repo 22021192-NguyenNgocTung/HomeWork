@@ -7,3 +7,18 @@ Selection sort
 1Kints: 3
 2Kints: 4
 4Kints: 13
+
+
+Cả hai thuật toán sắp xếp Chọn (Selection Sort) và Chèn (Insertion Sort) hoạt động tốt với danh sách liên kết (LinkedList), nhưng có một số yếu điểm và lợi ích khi lựa chọn danh sách liên kết cho mỗi thuật toán.
+
+Selection Sort với LinkedList:
+
+ - Selection Sort chọn phần tử nhỏ nhất từ danh sách và đặt nó ở vị trí đầu tiên. Nếu bạn sử dụng LinkedList, việc thay đổi chỉ đòi hỏi cập nhật một số liên kết, không cần phải sao chép các giá trị như mảng.
+
+ - Selection Sort có thể hoạt động tốt với LinkedList vì thao tác truy cập và truy cập các phần tử trong danh sách là hiệu quả với LinkedList.
+
+Insertion Sort với LinkedList:
+
+ - Insertion Sort chèn một phần tử vào danh sách đã sắp xếp. Sử dụng LinkedList cho phép việc chèn phần tử hiệu quả mà không cần phải dịch chuyển tất cả các phần tử khác, như trong mảng.
+
+ - Với mảng, việc chèn phần tử có thể đòi hỏi sao chép và dịch chuyển phần tử, trong khi với LinkedList, bạn chỉ cần cập nhật các liên kết.
