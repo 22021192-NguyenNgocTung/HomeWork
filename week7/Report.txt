@@ -1,0 +1,11 @@
+MergeSort
+
+1Kints: 2
+2Kints: 2
+4Kints: 2
+
+QuickSort
+
+1Kints: 1
+2Kints: 1
+4Kints: 2

@@ -21,16 +21,21 @@ class Result {
 
     public static int findMedian(List<Integer> arr) {
         // Write your code here
-        int tmp = partition(arr, 0 , arr.size() - 1) ;
-        while ( tmp != arr.size()/2) {
+        int lo = 0 ;
+        int hi= arr.size() - 1;
+        while (hi > lo) {
+            int tmp = partition(arr, lo , hi) ;
             if ( tmp < arr.size() /2 ){
-                tmp = partition(arr, tmp + 1 , arr.size() - 1) ;
+                lo = tmp + 1;
+            }
+            else if (tmp > arr.size()/2) {
+                hi = tmp - 1;
             }
             else {
-                tmp = partition(arr, 0 , tmp - 1);
+                break ;
             }
         }
-        return arr.get(tmp) ;
+        return arr.get(arr.size()/ 2) ;
     }
     public static int partition(List<Integer> arr , int lo , int hi){
             int i = lo , j = hi + 1;
