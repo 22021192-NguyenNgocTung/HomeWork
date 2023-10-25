@@ -22,3 +22,4 @@ Insertion Sort với LinkedList:
  - Insertion Sort chèn một phần tử vào danh sách đã sắp xếp. Sử dụng LinkedList cho phép việc chèn phần tử hiệu quả mà không cần phải dịch chuyển tất cả các phần tử khác, như trong mảng.
 
  - Với mảng, việc chèn phần tử có thể đòi hỏi sao chép và dịch chuyển phần tử, trong khi với LinkedList, bạn chỉ cần cập nhật các liên kết.
+
