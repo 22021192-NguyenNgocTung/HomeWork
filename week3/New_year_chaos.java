@@ -1,5 +1,11 @@
 import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
 import java.util.*;
+import java.util.concurrent.*;
+import java.util.function.*;
+import java.util.regex.*;
 import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -13,31 +19,42 @@ class Result {
      */
 
     public static void minimumBribes(List<Integer> q) {
-        // Write your code here
-        int sum = 0 ;
-        boolean check = true ;
-        for ( int i = 0 ; i < q.size() ; ++i){
-            int dem = 0 ;
-            for ( int j = i + 1 ; j < q.size() ; ++j){
-                if ( q.get(i) > q.get(j) ) dem ++ ;
-            }
-            if ( dem > 2) {
-                check = false ;
+        List<Integer> check_list = new ArrayList<>(q.size());
+        for ( int i = 0 ; i < q.size() ; i++) {
+            check_list.add(i+1);
+        }
+        int count = 0;
+        for ( int i = q.size() - 1 ; i >= 0 ; i--) {
+            if ( q.equals(check_list)) {
+                System.out.println(count);
                 break;
             }
-            sum += dem ;
-        }
-        if ( check ){
-            System.out.println(sum) ;
-        }
-        else {
-            System.out.println("Too chaotic");
+            boolean found = false;
+            int index = i+1 , index_num = i;
+            while ( index_num >= i-2 ) {
+                if ( q.get(index_num) == index ) {
+                    found = true;
+                    break;
+                }
+                index_num--;
+            }
+            if (!found) {
+                System.out.println("Too chaotic");
+                break;
+            }
+
+            while (index_num < index - 1) {
+                Collections.swap( q , index_num , index_num + 1);
+                index_num++;
+                count++;
+            }
+
         }
     }
 
 }
 
-public class New_year_chaos {
+public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
