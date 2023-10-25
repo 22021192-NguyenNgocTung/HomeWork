@@ -10,49 +10,6 @@ import java.util.regex.*;
 import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
-class heap{
-    public heap() {
-    }
-    public int getMin(){
-        return a.get(0) ;
-    }
-    public List<Integer> a = new ArrayList<>();
-    public int delMin(){
-        exch(1 , a.size()) ;
-        int ans = a.remove(a.size() - 1) ;
-        sink(1);
-        return ans ;
-    }
-    public void insert(int item){
-        a.add(item) ;
-        swim(a.size());
-    }
-    public void swim(int k){
-        while ( k > 1 && less(k , k/2 )){
-            exch(k , k/2);
-            k = k/2 ;
-        }
-    }
-    public void sink(int i ){
-        while ( i * 2 <= a.size()){
-            int j = i * 2 ;
-            if (j < a.size() && less(j + 1,j )){
-                j++ ;
-            };
-            if (!less(j,i)) break;
-            exch( i ,j);
-            i = j ;
-        }
-    }
-    public boolean less(int i , int j ){
-        return a.get(i - 1) < a.get(j - 1) ;
-    }
-    public void exch(int i , int j ){
-        int tmp = a.get(i - 1) ;
-        a.set(i - 1 , a.get(j -1)) ;
-        a.set(j - 1 , tmp) ;
-    }
-}
 class Result {
 
     /*
@@ -66,27 +23,28 @@ class Result {
 
     public static int cookies(int k, List<Integer> A) {
         // Write your code here
-        heap arr = new heap() ;
+        Queue<Integer> pqueue = new PriorityQueue<>();
         for ( int i = 0 ; i < A.size() ; i++){
-            arr.insert(A.get(i));
+            pqueue.add(A.get(i)) ;
         }
         int dem = 0 ;
-        while (arr.getMin() < k && arr.a.size() >= 2) {
-            int m1 = arr.delMin() ;
-            int m2 = arr.getMin() ;
-            arr.a.set(0 , m1 + 2 * m2) ;
-            arr.sink(1);
-            dem ++ ;
+        while (pqueue.size() >= 2 && pqueue.peek() < k){
+            int m1 = (Integer)pqueue.poll();
+            int m2 = (Integer)pqueue.poll();
+            pqueue.add(m1 + 2* m2) ;
+            dem ++;
         }
-        if (arr.getMin() < k){
+        if (pqueue.peek() < k){
             return -1 ;
         }
-        else return dem ;
+        else {
+            return dem ;
+        }
     }
 
 }
 
-public class Cookies {
+public class Solution {
     public static void main(String[] args) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
