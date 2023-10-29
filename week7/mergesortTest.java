@@ -12,11 +12,11 @@ class mergesort {
         }
         int i = lo, j = mid + 1;
         for (int k = lo; k <= hi; k++) {
-            if (i > mid) aux[k] = a[j++];
-            else if (j > hi) aux[k] = a[i++];
-            else if (a[i] < a[j]) aux[k] = a[i++];
+            if (i > mid) a[k] = aux[j++];
+            else if (j > hi) a[k] = aux[i++];
+            else if (a[i] < a[j]) a[k] = aux[i++];
             else {
-                aux[k] = a[j++];
+                a[k] = aux[j++];
             }
         }
     }
