@@ -10,6 +10,51 @@ import java.util.regex.*;
 import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+class Sort_Heap{
+    public int[] arr  ;
+
+    public Sort_Heap() {
+        arr = new int[1000001];
+        n = 0 ;
+    }
+
+    public int n ;
+    public void insert(int item){
+        arr[++n] = item ;
+        swim(n);
+    }
+    public void swim(int k){
+        while ( k > 1 && arr[k] < arr[k/2] ){
+            int tmp = arr[k] ;
+            arr[k] = arr[k/2] ;
+            arr[k/2] =tmp ;
+            k = k/2 ;
+        }
+    }
+    public int getMin(){
+        return arr[1] ;
+    }
+    public int deleteMin(){
+        int ans = arr[1] ;
+        arr[1] = arr[n--] ;
+        sink(1);
+        return ans ;
+    }
+    public void sink(int k){
+        while (k*2 <= n){
+            int j = k*2 ;
+            if ( j < n && arr[j+1] < arr[j]) j++ ;
+            if (arr[j] >arr[k]) break ;
+            int tmp = arr[j] ;
+            arr[j] = arr[k] ;
+            arr[k] = tmp ;
+            k = j ;
+        }
+    }
+    public int size(){
+        return n ;
+    }
+}
 class Result {
 
     /*
@@ -23,18 +68,18 @@ class Result {
 
     public static int cookies(int k, List<Integer> A) {
         // Write your code here
-        Queue<Integer> pqueue = new PriorityQueue<>();
+        Sort_Heap pqqueHeap = new Sort_Heap();
         for ( int i = 0 ; i < A.size() ; i++){
-            pqueue.add(A.get(i)) ;
+            pqqueHeap.insert(A.get(i)) ;
         }
         int dem = 0 ;
-        while (pqueue.size() >= 2 && pqueue.peek() < k){
-            int m1 = (Integer)pqueue.poll();
-            int m2 = (Integer)pqueue.poll();
-            pqueue.add(m1 + 2* m2) ;
+        while (pqqueHeap.size() >= 2 && pqqueHeap.getMin() < k){
+            int m1 = pqqueHeap.deleteMin();
+            int m2 = pqqueHeap.deleteMin();
+            pqqueHeap.insert(m1 + 2* m2) ;
             dem ++;
         }
-        if (pqueue.peek() < k){
+        if (pqqueHeap.getMin() < k){
             return -1 ;
         }
         else {
